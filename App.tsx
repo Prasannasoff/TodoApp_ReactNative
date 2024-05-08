@@ -66,6 +66,7 @@
 //-------------------------------------------------------------------------------------------------//
 import { SafeAreaView, StyleSheet, Text, View, Image, Button,TextInput, Touchable, TouchableOpacity } from 'react-native'
 
+import React from 'react';
 
 import Task from './src/components/Task';
 const App = () => {
