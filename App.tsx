@@ -1,118 +1,84 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+// import { SafeAreaView, StyleSheet, Text, View, Image, Button } from 'react-native'
+// //import { scale, verticalScale, moderateScale,s,vs,rrMS } from 'react-native-size-matters'; //to make page responsive. Vertical scale for height and scale for width
+// import { rMS, rS, rV } from './src/styles/responsive'
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+// import React, { useState } from 'react'
+// // if normal scale will increase your size by +2X, moderateScale will only increase it by +X. 
+// const App = () => {
+//   const [count, setcount] = useState(0)
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+//   return (
+//     //safe areas is phone screen without notches, the View component renders a container
+//     <SafeAreaView style={[styles.cont, { flex: 2, alignItems: 'center' }]}>
+//       <View style={[styles.div1]}>
+//         <Image
+//           source={{
+//             uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZTJ9PiXYRPBIWO2maHbR9UZHFId3Jj0aDTYR6uXROOA&s"
+//           }}
+//           style={{ height: rV(300), width: rS(400) }} />
+//       </View>
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+//       <View style={[styles.div2]}>
+//         <Text style={[styles.poppins]}>App</Text>
+//         <Text style={{ fontSize: rMS(30) }}>Your Count is {count}</Text>
+//         <Button onPress={() => setcount(count + 1)} title='click' />
+//         <Button onPress={() => setcount(0)} title='reset' />
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+//       </View>
+//     </SafeAreaView>
+
+
+//   )
+
+// }
+// export default App
+// const styles = StyleSheet.create({
+//   poppins: {
+//     fontFamily: 'Poppins-Black',
+//     fontSize: rMS(60),
+//     color: 'red',
+//   },
+//   cont: {
+
+//     width: 'auto',
+//     height: 'auto',
+
+
+//   },
+//   div1: {
+//     width: rS(400),
+//     height: 'auto',
+//     backgroundColor:'blue',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     gap: 20
+//   },
+//   div2: {
+//     width: 'auto',
+//     height: 'auto',
+//     flex:1,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     backgroundColor:'red',
+//     gap: 20
+//   }
+// })
+//-------------------------------------------------------------------------------------------------//
+import { SafeAreaView, StyleSheet, Text, View, Image, Button,TextInput, Touchable, TouchableOpacity } from 'react-native'
+
+
+import Task from './src/components/Task';
+const App = () => {
+  return(
+ <SafeAreaView>
+  <Task/>
+ </SafeAreaView>
+  )
+
 }
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
 export default App;
+const styles = StyleSheet.create({
+  
+
+
+})

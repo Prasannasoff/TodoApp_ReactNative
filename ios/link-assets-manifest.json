@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/styles/assets/fonts/Jaro-Regular.ttf",
+      "sha1": "e5814eda3491aeba5e5f9adc9222306c7fc25a3d"
+    },
+    {
+      "path": "src/styles/assets/fonts/Poppins-Black.ttf",
+      "sha1": "645e04c53c6b5b35bce654a811ebce16af8aa721"
+    }
+  ]
+}
