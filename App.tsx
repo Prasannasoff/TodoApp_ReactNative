@@ -68,11 +68,12 @@ import { SafeAreaView, StyleSheet, Text, View, Image, Button,TextInput, Touchabl
 
 import React from 'react';
 
-import Task from './src/components/Task';
+// import Task from './src/components/Task';
+import TODO from './src/components/Todo';
 const App = () => {
   return(
  <SafeAreaView>
-  <Task/>
+  <TODO/>
  </SafeAreaView>
   )
 
