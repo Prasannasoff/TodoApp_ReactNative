@@ -64,23 +64,29 @@
 //   }
 // })
 //-------------------------------------------------------------------------------------------------//
-import { SafeAreaView, StyleSheet, Text, View, Image, Button,TextInput, Touchable, TouchableOpacity } from 'react-native'
+import { SafeAreaView, StyleSheet, Button, Modal, Alert, ScrollView } from 'react-native'
 
 import React from 'react';
+
 
 // import Task from './src/components/Task';
 import TODO from './src/components/Todo';
 const App = () => {
-  return(
- <SafeAreaView>
-  <TODO/>
- </SafeAreaView>
+  return (
+    <SafeAreaView style={{backgroundColor:'white',flex:1}}>
+     
+
+
+        <TODO />
+      
+
+    </SafeAreaView>
   )
 
 }
 export default App;
 const styles = StyleSheet.create({
-  
+
 
 
 })

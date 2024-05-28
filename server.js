@@ -29,6 +29,16 @@ app.post('/tasks', async (req, res) => {
 
     }
 });
+app.post('/markRead/:id', async (req, res) => {
+    const { id } = req.params;
+    const { read } = req.body;
+    try {
+        const updatedTask = await model.findByIdAndUpdate(id, { read }, { new: true });
+        res.send(updatedTask);
+    } catch (error) {
+        return res.status(400).json({ error });
+    }
+});
 app.put('/edit/:id', async (req, res) => {
     const { id } = req.params;
     const { title } = req.body;

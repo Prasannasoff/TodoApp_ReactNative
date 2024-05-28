@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { rMS, rS, rV } from '../styles/responsive'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const Todo = () => {
     const [todo, settodo] = useState('')
+
     const [todolist, settodolist] = useState([])
     const [edittodo, setedittodo] = useState(null)
     const [id, setid] = useState([])
@@ -19,7 +20,7 @@ const Todo = () => {
     const fetchData = async () => {
         try {
             setloading(true)
-            const response = await axios.get("http://192.168.0.111:5000/");
+            const response = await axios.get("http://192.168.0.108:5000/");
             settodolist(response.data.tasks)
 
             setloading(false)
@@ -33,7 +34,7 @@ const Todo = () => {
     const addtodo = async () => {
         if (todo.length !== 0) {
             try {
-                const response = await axios.post("http://192.168.0.111:5000/tasks", { title: todo });
+                const response = await axios.post("http://192.168.0.108:5000/tasks", { title: todo });
                 console.log(response.data.title)
                 settodolist(todolist.concat(response.data))
                 settodo("");
@@ -55,6 +56,21 @@ const Todo = () => {
             console.log("Enter Something");
         }
     }
+    const markRead = async (id) => {
+
+        const response = axios.post(`http://192.168.0.108:5000/markRead/${id}`,
+            { read: 'true' }
+        )
+        const updatetodo = todolist.map(item => {
+            if (item._id === id) {
+                return { ...item, read: true };
+            }
+            return item;
+        })
+        settodolist(updatetodo);
+        console.log(response);
+
+    }
     const edit = (item, id) => {
         setid(id)
         console.log(id)
@@ -65,7 +81,7 @@ const Todo = () => {
     const save = async () => {
         try {
             // Send a PUT request to update the todo item
-            const response = await axios.put(`http://192.168.0.111:5000/edit/${id}`, {
+            const response = await axios.put(`http://192.168.0.108:5000/edit/${id}`, {
                 title: todo,
             });
 
@@ -110,7 +126,7 @@ const Todo = () => {
         // }
         //or
         try {
-            const response = await axios.delete(`http://192.168.0.111:5000/data/${id}`)
+            const response = await axios.delete(`http://192.168.0.108:5000/data/${id}`)
             console.log(response.data);
         }
         catch (error) {
@@ -127,17 +143,20 @@ const Todo = () => {
     const renderTodo = ({ item, index }) => {
 
         return (
-            <View style={[styles.content]}>
+
+            <View style={[styles.content,]}>
                 {/*  the fragment is used to wrap the Text and View components returned inside the if condition.This ensures that multiple elements can be conditionally rendered without violating JSX syntax rules. */}
 
 
-                <Text>{item.title}</Text>
+                <Text style={item.read ? styles.line : { color: 'black' }}>{item.title}</Text>
+
 
 
 
 
 
                 <View style={[styles.btns]}>
+                    <TouchableOpacity onPress={() => markRead(item._id)}><Text style={[styles.btn1]}>Mark Read</Text></TouchableOpacity>
                     <TouchableOpacity onPress={() => edit(item.title, item._id)}><Text style={[styles.btn1]}>Edit</Text></TouchableOpacity>
                     <TouchableOpacity onPress={() => deletetodo(item.title, item._id)}><Text style={[styles.btn2]}>Delete</Text></TouchableOpacity>
                 </View>
@@ -149,7 +168,9 @@ const Todo = () => {
     }
 
     return (
+
         <View>
+
             <View style={[styles.task]}>
                 <TextInput style={[styles.input]} placeholder='Add a task' value={todo} onChangeText={settodo} />
                 <Text style={[styles.head]}>Your Task's</Text>
@@ -157,7 +178,11 @@ const Todo = () => {
                 <View style={[styles.list]}>
                     {/*  if the data provided to the FlatList changes (for example, if you add or remove items from the data array), the FlatList will re-render to reflect those changes. */}
 
-                    <FlatList data={todolist} renderItem={renderTodo} />
+                    <FlatList
+                        data={todolist}
+                        renderItem={renderTodo}
+                        keyExtractor={(item) => item._id}
+                    />
                 </View>
 
 
@@ -176,7 +201,10 @@ const Todo = () => {
 
 
             </View>
+
         </View>
+
+
 
 
 
@@ -197,6 +225,7 @@ const styles = StyleSheet.create({
     input: {
         borderWidth: rS(1),
         borderRadius: 8,
+        color: 'black'
     },
     head: {
         fontFamily: 'Jaro-Regular',
@@ -245,5 +274,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: 'red',
         color: 'white',
+    },
+    line: {
+        textDecorationLine: 'line-through',
+        color: 'red',
     }
+
 });
